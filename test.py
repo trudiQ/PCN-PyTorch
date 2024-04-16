@@ -36,7 +36,8 @@ def test_single_category(category, model, params, save=True):
         make_dir(image_dir)
         make_dir(output_dir)
 
-    test_dataset = ShapeNet('/media/server/new/datasets/PCN', 'test_novel' if params.novel else 'test', category)
+    #test_dataset = ShapeNet('/media/server/new/datasets/PCN', 'test_novel' if params.novel else 'test', category)
+    test_dataset = ShapeNet('data/PCN', 'test_novel' if params.novel else 'test', category)
     test_dataloader = Data.DataLoader(test_dataset, batch_size=params.batch_size, shuffle=False)
 
     index = 1

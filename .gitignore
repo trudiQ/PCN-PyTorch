@@ -2,4 +2,9 @@
 __pycache__
 log
 .idea
-data/pcn
+data/
+extensions/chamfer_distance/build/
+extensions/chamfer_distance/dist/
+extensions/earth_movers_distance/build/
+extensions/earth_movers_distance/dist/
+results/

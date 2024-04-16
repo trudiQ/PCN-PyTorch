@@ -30,6 +30,24 @@ As for other modules, please install by:
 
 ```shell
 pip install -r requirements.txt
+
+## Troubleshooting
+* Upgrade PyTorch to 1.12 to work with CUDA 11.3
+    - 'conda install pytorch==1.11.0 torchversion==0.12.0 torchaudio==0.11.0 cudatoolkit=11.3 -c pytorch'
+    - 'conda install nvidia/label/cuda-11.3.1::cuda-toolkit'
+    - 'export CUDA_HOME=$CONDA_PREFIX'
+* ImportError: /lib/x86_64-linux-gnu/libstdc++.so.6: version `GLIBCXX_3.4.29' not found
+    - Solution: Install GLIBCXX_3.4.29 in the system
+        - 'sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test'
+        - 'sudo apt install -y g++-11'
+        - 'strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep GLIBCXX'
+
+* Cannot find 'THC/THC.h' called in "emd_kernel.cu"
+    - Solution: Older version of xxx
+        - Comment out that header file in that file
+        - Replace 'THCudaCheck(cudaGetLastError());' with ' C10_CUDA_CHECK(cudaGetLastError());'
+
+
 ```
 
 ## Dataset
