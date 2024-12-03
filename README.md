@@ -56,6 +56,9 @@ pip install -r requirements.txt
         - `/data/PCN/`
 
 * If you want to create your own dataset, please reference `render` and `sample`. 
+    - `/data/ShapeNetCore.v1/` (including the zip file) are the original ShapeNetCore dataset unzipped for reference; models are saved as OBJ
+    - `/data/ShapeNet/` contains the selected 3D models to check:
+        - `tables/04379243/` contains all the table models in ShapeNetCore
 
 
 ## Training
@@ -78,6 +81,10 @@ In order to test the model, please use follow script:
 
 ```shell
 python test.py --exp_name PCN_16384 --ckpt_path <path of pretrained model> --batch_size 32 --num_workers 8
+```
+For example, on server 1
+```shell
+python test.py --exp_name PCN_16384 --ckpt_path checkpoint/best_l1_cd.pth --batch_size 32 --num_workers 8
 ```
 
 Because of the computation cost for calculating emd for 16384 points, I split out the emd's evaluation. The parameter `--emd` is used for testing emd. The parameter `--novel` is for novel testing data contains unseen categories while training. The parameter `--save` is used for saving the prediction into `.ply` file and visualize the result into `.png` image.
