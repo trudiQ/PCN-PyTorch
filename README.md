@@ -7,11 +7,25 @@
 This is implementation of PCN——Point Completion Network in pytorch. PCN is an autoencoder for point cloud completion. As for the details of the paper, please refer to [arXiv](https://arxiv.org/pdf/1808.00671.pdf).
 
 ## Environment
-
+# Original:
 * Ubuntu 18.04 LTS
 * Python 3.7.9
 * PyTorch 1.7.0
 * CUDA 10.1.243
+# My Server 1
+* Ubuntu 20.04
+* Python 3.7.16
+* PyTorch 1.12
+* CUDA 11.3
+# DGX0:
+* Ubuntu 20.04
+* Download NVIDIA Pytorch Docker Container: **22.05-py3**
+    - CUDA: 11.7
+    - PyTorch: 1.12
+    - Python: 3.8
+* Use Docker container and mount directory
+    - docker run -it --rm --gpus all -v /nfshome/dqi/Projects/PCN-PyTorch:/workspace/data nvcr.io/nvidia/pytorch:22.05-py3
+
 
 ## Prerequisite
 
@@ -34,6 +48,17 @@ pip install -r requirements.txt
 ```
 
 ## Troubleshooting
+# DGX0:
+* Error messages:
+    - "docker container OSError: libX11.so.6: cannot open shared object file: No such file or directory"
+        - `apt-get update`
+        - `apt-get install -y libx11-6`
+    - "OSError: libGL.so.1: cannot open shared object file: No such file or directory"
+        - `apt-get install -y libgl1`
+    - "ImportError: cannot import name 'url_quote' from 'werkzeug.urls' (/opt/conda/lib/python3.8/site-packages/werkzeug/urls.py)"
+        - This issue arises because url_quote was removed in Werkzeug version 3.0.0, leading to compatibility problems with applications that depend on this function
+        - `pip install Werkzeug==2.2.2`
+# My Server 1
 * Upgrade PyTorch to 1.12 to work with CUDA 11.3
     - `conda install pytorch==1.11.0 torchversion==0.12.0 torchaudio==0.11.0 cudatoolkit=11.3 -c pytorch`
     - `conda install nvidia/label/cuda-11.3.1::cuda-toolkit`
